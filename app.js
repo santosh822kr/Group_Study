@@ -9,6 +9,7 @@ const passport = require('passport')
 const session = require('express-session')
 //const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/dataBase')
+const logger = require('./middleware/logger')
 
 dotenv.config({ path: './config/config.env' })
 
@@ -17,6 +18,8 @@ require('./config/passport')(passport)
 connectDB()
 
 const app = express()
+
+app.use(logger)
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
